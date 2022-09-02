@@ -1,4 +1,4 @@
-import {isValidBody} from "./validations.js";
+import {isValidBody, findAvatar} from "./utils.js";
 
 const USERS_DB = [];
 const TWEETS_DB = [];
@@ -19,6 +19,7 @@ const postSignUp = (req, res) => {
 
 const postTweets = (req, res) => {
   const {body} = req;
+  body.username = req.headers.user;
 
   if (!isValidBody(body, ["username", "tweet"])) {
     res.status(400).send("Todos os campos são obrigatórios!");
@@ -31,7 +32,12 @@ const postTweets = (req, res) => {
   }
 };
 
-const getTweets = (req, res) => {};
+const getTweets = (req, res) => {
+  const lastTweets = TWEETS_DB.slice(-10);
+  lastTweets.forEach(tweet => (tweet.avatar = findAvatar(tweet, USERS_DB)));
+
+  res.send(lastTweets);
+};
 
 const getTweetsByUsername = (req, res) => {};
 
