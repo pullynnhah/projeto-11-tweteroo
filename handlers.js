@@ -9,10 +9,7 @@ const postSignUp = (req, res) => {
   if (!isValidBody(body, ["username", "avatar"])) {
     res.status(400).send("Todos os campos são obrigatórios!");
   } else {
-    USERS_DB.push({
-      ...req.body,
-      id: USERS_DB.length + 1,
-    });
+    USERS_DB.push(body);
     res.status(201).send("OK");
   }
 };
@@ -24,10 +21,7 @@ const postTweets = (req, res) => {
   if (!isValidBody(body, ["username", "tweet"])) {
     res.status(400).send("Todos os campos são obrigatórios!");
   } else {
-    TWEETS_DB.push({
-      ...req.body,
-      id: TWEETS_DB.length + 1,
-    });
+    TWEETS_DB.push(body);
     res.status(201).send("OK");
   }
 };

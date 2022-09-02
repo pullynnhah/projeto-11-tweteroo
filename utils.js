@@ -22,6 +22,6 @@ function isValidBody(body, fields) {
 }
 
 function findAvatar(tweet, users) {
-  return users.find(user => (tweet.username = user.username))?.avatar ?? "NO AVATAR";
+  return users.find(user => tweet.username === user.username)?.avatar ?? "NO AVATAR";
 }
 export {isValidBody, findAvatar};
